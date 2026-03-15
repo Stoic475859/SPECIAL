@@ -3,64 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typography Portrait</title>
+    <title>Our Special Day</title>
     <style>
-        body {
+        :root {
+            --primary-pink: #ff4d6d;
+            --deep-rose: #c9184a;
+            --soft-gold: #ffd700;
+            --glass: rgba(255, 255, 255, 0.08);
+        }
+
+        body, html {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-color: black;
-            font-family: Arial, sans-serif;
-            overflow: hidden; /* Prevent scrolling if the text goes beyond */
+            background: #05070a;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            overflow: hidden;
+            color: white;
+        }
+
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 50% 50%, #1a1f2c 0%, #05080a 100%);
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: transparent url(https://i.imgur.com/Y4Yg7A2.png) repeat;
+            z-index: -1;
+            opacity: 0.3;
+            animation: twinkle 5s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
 
         .container {
-            width: 100%;
-            height: 100vh; /* Stretch to cover the viewport height */
-            background-color: rgba(255, 255, 255, 0.2); /* Adjust for text visibility */
-            background-image: 
-                linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), /* Dark overlay for image depth */
-                url('image_1.png'); /* Set image_1.png as the background */
-            background-size: cover;
-            background-position: center;
-            -webkit-background-clip: text; /* Clip background to the text for the cutout effect */
-            background-clip: text;
-            -webkit-text-fill-color: transparent; /* Makes the original text color invisible, so only the background shows through */
-            color: transparent; 
+            position: relative;
             text-align: center;
-            display: grid;
-            grid-template-columns: repeat(20, 1fr); /* Creates a dense grid for wrapping text */
-            grid-template-rows: repeat(auto-fill, minmax(20px, 1fr));
-            overflow: hidden;
-            letter-spacing: -1px; /* Tighter letter spacing to match the reference */
+            padding: 40px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+            max-width: 80%;
         }
 
-        /* Adjusting size and font to match density from image_0 */
-        .grid-item {
-            font-size: 10px; 
-            white-space: nowrap; /* Prevents word breaking within items */
-            font-weight: bold; /* Make the text slightly bolder for more opacity */
-            padding: 1px; /* Minor spacing adjustments */
+        .main-photo {
+            max-width: 100%;
+            max-height: 50vh;
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(255, 77, 109, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: block;
+            margin: 0 auto;
+            animation: photo-pulse 4s infinite ease-in-out;
+        }
+
+        /* The Counter Styling */
+        .counter-section {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: var(--soft-gold);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .days-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .monthsary-text {
+            margin-top: 20px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #fff, var(--primary-pink), var(--soft-gold), #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
+        }
+
+        @keyframes photo-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* Hearts */
+        .heart-particle {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            user-select: none;
+            filter: drop-shadow(0 0 5px rgba(255, 77, 109, 0.5));
+        }
+
+        @keyframes floatAndSway {
+            0% { transform: translateY(10vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-110vh) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            .monthsary-text { font-size: 1.1rem; }
+            .days-number { font-size: 1.8rem; }
+            .container { padding: 25px; width: 90%; }
         }
     </style>
 </head>
 <body>
-    <div class="container" id="container">
+
+    <div class="background-wrapper"></div>
+    <div class="stars"></div>
+
+    <div class="container">
+        <img src="./pic.jpg" alt="Our Memory" class="main-photo">
+        
+        <div class="counter-section">
+            Together for
+            <span id="days-count" class="days-number">0</span>
+            Days & Counting
         </div>
 
-    <script>
-        const container = document.getElementById('container');
-        const phrase = "HAPPY MONTHSARY BAY KO "; 
-        const repeats = 2000; // Adjust for text density and coverage
+        <div class="monthsary-text">
+            ❤ Happy Monthsary Bay Ko ❤
+        </div>
+    </div>
 
-        for (let i = 0; i < repeats; i++) {
-            const span = document.createElement('span');
-            span.className = 'grid-item';
-            span.textContent = phrase;
-            container.appendChild(span);
+    <script>
+        // 1. SET YOUR ANNIVERSARY DATE HERE (Year, MonthIndex, Day)
+        // Note: January is 0, February is 1, March is 2, etc.
+        const anniversaryDate = new Date(2022, 7, 15); // Example: Jan 15, 2024
+
+        function updateCounter() {
+            const now = new Date();
+            const difference = now - anniversaryDate;
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            document.getElementById('days-count').innerText = days;
         }
+
+        updateCounter();
+
+        // Heart Logic
+        const colors = ['#ff4d6d', '#ff758f', '#c9184a', '#ffb3c1', '#ffd700'];
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            const size = Math.random() * 20 + 10;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const duration = Math.random() * 5 + 5;
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.bottom = "-5vh";
+            heart.style.fontSize = size + "px";
+            heart.style.color = color;
+            heart.style.filter = `blur(${Math.random() * 2}px)`;
+            heart.style.animation = `floatAndSway ${duration}s ease-in-out forwards`;
+            heart.innerHTML = '❤';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, duration * 1000);
+        }
+        setInterval(createHeart, 400);
     </script>
 </body>
 </html>
